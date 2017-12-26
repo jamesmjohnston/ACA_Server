@@ -22,7 +22,7 @@ var loadText = function (filename, root) {
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   var txt = loadText('map','/home/ec2-user/node_modules/aca-server/data');
-  res.send("temp text");
+  res.send(txt);
 });
 
 module.exports = router;
