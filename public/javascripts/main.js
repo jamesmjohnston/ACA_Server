@@ -25,7 +25,11 @@ function init() {
 	createjs.Ticker.setFPS(FRAME_RATE);	
 	createjs.Ticker.addEventListener("tick", tick);	
 	
-	map = sys.Rest("map","GET");
+	sys.Rest.then(function(result) {
+		map = result;
+	}), function(err) {
+		console.log('map failed');
+	});
 }
 
 function tick(event) {

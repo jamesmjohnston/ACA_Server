@@ -6,15 +6,15 @@ sys.rng = function(min, max) {
 
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 };
-
-sys.Rest = function(Route, type) {
+sys.Rest = new Promise(function(resolve, reject) {
     var xhttp = new XMLHttpRequest();
-    xhttp.open(type, Route, true);
+    xhttp.open('GET', 'map', true);
     xhttp.setRequestHeader("Content-type", "text/plain");
     xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			return this.responseText;
-		}
+		if (this.readyState == 4 && this.status == 200)
+			resolve(this.responseText);				
+		else
+			reject(Error("Fetch Failed"));
 	};
     xhttp.send();
-};
+});
