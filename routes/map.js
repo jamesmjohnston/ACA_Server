@@ -21,7 +21,7 @@ var loadText = function (filename, root) {
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  var txt = loadText('map','..');
+  var txt = loadText('map','../data');
   res.send(txt);
 });
 
