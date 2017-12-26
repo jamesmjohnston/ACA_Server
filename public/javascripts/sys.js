@@ -13,7 +13,7 @@ sys.Rest = new Promise(function(resolve, reject) {
     xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200)
 			resolve(this.responseText);				
-		else
+		else if (this.status == 400)
 			reject(Error("Fetch Failed"));
 	};
     xhttp.send();
