@@ -10,7 +10,7 @@ sys.rng = function(min, max) {
 sys.Rest = function(Route, type) {
     var xhttp = new XMLHttpRequest();
     xhttp.open(type, BASE_URL + Route, true);
-    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.setRequestHeader("Content-type", "text/plain");
     xhttp.send();
     var response = xhttp.responseText;
 };
