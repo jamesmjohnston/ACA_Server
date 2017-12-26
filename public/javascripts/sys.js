@@ -9,7 +9,7 @@ sys.rng = function(min, max) {
 
 sys.Rest = function(Route, type) {
     var xhttp = new XMLHttpRequest();
-    xhttp.open(type, BASE_URL + Route, true);
+    xhttp.open(type, Route, true);
     xhttp.setRequestHeader("Content-type", "text/plain");
     xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
