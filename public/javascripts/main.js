@@ -27,7 +27,7 @@ function init() {
 	
 	sys.Rest.then(function(result) {
 		map = result;
-	}), function(err) {
+	}, function(err) {
 		console.log('map failed');
 	});
 }
