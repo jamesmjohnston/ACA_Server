@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  var txt = sys.loadText('map','/home/ec2-user/node_modules/aca-server/data');
+  var txt = sys.loadText('map');
   res.send(txt);
 });
 

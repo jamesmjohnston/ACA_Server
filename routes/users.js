@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.init = function() {
-	this.users = sys.readJSON('users','/home/ec2-user/node_modules/aca-server/data');
+	this.users = sys.readJSON('users');
 };
 
 module.exports = router;
