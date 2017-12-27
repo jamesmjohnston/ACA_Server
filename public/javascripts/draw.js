@@ -1,11 +1,11 @@
 var draw = {};
 
-draw.fillGrid = function(stage, width, height) {
-	var colors = ["#2E7D32", "#515A5A", "#DAF7A6"];
+draw.fillGrid = function(map, stage, width, height) {
+	var colors = ["#2E7D32", "#DAF7A6", "#515A5A", "#21618C"];
     for (var x = 0; x < width; x += GRID_SIZE) {
 		for (var y = 0; y < height; y += GRID_SIZE) {
 			
-            var color = colors[sys.rng(0,2)];
+            var color = colors[map[x][y]];
             stage.addChild(draw.drawSquare(x,y, GRID_SIZE, GRID_SIZE, color));
         }
     }

@@ -19,14 +19,13 @@ function init() {
 	stage.addChild(draw.drawSquare(4*GRID_SIZE,2*GRID_SIZE,GRID_SIZE,GRID_SIZE,"Purple"));
 	
 	draw.generateGrid(container, w, h);
-	draw.fillGrid(container, w, h);
 
-    stage.update();
 	createjs.Ticker.setFPS(FRAME_RATE);	
 	createjs.Ticker.addEventListener("tick", tick);	
 	
 	sys.Rest.then(function(result) {
 		map = result;
+		draw.fillGrid(map, container, w, h);
 	}, function(err) {
 		console.log('map failed');
 	});

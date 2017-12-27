@@ -12,7 +12,7 @@ sys.Rest = new Promise(function(resolve, reject) {
     xhttp.setRequestHeader("Content-type", "text/plain");
     xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200)
-			resolve(this.responseText);				
+			resolve(map.readTerrain(this.responseText));				
 		else if (this.status == 400)
 			reject(Error("Fetch Failed"));
 	};
