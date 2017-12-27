@@ -25,7 +25,7 @@ module.exports = function(root) {
 	
 	module.saveJSON = function(filename, object) {
 		var fs = require('fs');
-		var stream = fs.createWriteStream('./' + root + '/' + filename + ".json");
+		var stream = fs.createWriteStream(root + '/' + filename + ".json");
 		stream.once('open', function(fd) {
 			stream.write(JSON.stringify(object, null, '\t'));
 			stream.end();
