@@ -23,9 +23,12 @@ function init() {
 	createjs.Ticker.setFPS(FRAME_RATE);	
 	createjs.Ticker.addEventListener("tick", tick);	
 	
-	sys.Rest.then(function(result) {
+	sys.Rest('map').then(function(result) {
 		map = result;
 		draw.fillGrid(map, container, w, h);
+		sys.Rest('users').then(function(result) {
+			
+		});
 	}, function(err) {
 		console.log('map failed');
 	});

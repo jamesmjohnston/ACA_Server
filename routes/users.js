@@ -5,9 +5,9 @@ router.users = {};
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  console.log("adding: " + ip);
-  new User(ip);
-  res.send('adding: '+ip);
+  console.log("fetching- " + ip);
+  user = new User(ip);
+  res.send(user);
 });
 
 router.init = function() {

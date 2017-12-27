@@ -13,9 +13,9 @@ User = require('./bin/user.js');
 
 var app = express();
 users.init();
-for (u in users.users) {
-	console.log("user: "+u.id);
-}
+for (u in users.users)
+	console.log("user- "+u);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);
