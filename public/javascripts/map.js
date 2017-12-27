@@ -1,7 +1,7 @@
 var map = {};
 
 map.readTerrain = function(data) {
-	data = data.split('\r\n');
+	data = data.split('\n');
 	
 	var dims = data[0].split('-');
 	this.width = parseInt(dims[0]);

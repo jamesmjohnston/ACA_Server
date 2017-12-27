@@ -5,7 +5,7 @@ draw.fillGrid = function(map, stage, width, height) {
     for (var x = 0; x < width; x += GRID_SIZE) {
 		for (var y = 0; y < height; y += GRID_SIZE) {
 			
-            var color = colors[map[x][y]];
+            var color = colors[map[x/GRID_SIZE][y/GRID_SIZE]];
             stage.addChild(draw.drawSquare(x,y, GRID_SIZE, GRID_SIZE, color));
         }
     }
