@@ -14,7 +14,7 @@ draw.fillGrid = function(map, stage, width, height) {
 draw.drawSquare = function(x, y, width, height, color) {
 	var square = new createjs.Shape();
 	square.graphics.beginFill(color);
-	square.graphics.drawRect(1, 1, width-2, height-2);
+	square.graphics.drawRect(1, 1, width-1, height-1);
 	square.x = x;
 	square.y = y;
 	return square

@@ -27,7 +27,7 @@ function init() {
 	sys.Rest('map').then(function(result) {
 		map = map.readTerrain(result);
 		draw.fillGrid(map, container, w, h);
-		draw.generateGrid(container, w, h);
+		//draw.generateGrid(container, w, h);
 		sys.Rest('users', true).then(function(result) {
 			user = JSON.parse(result);
 			container.x -= GRID_SIZE * (50 + user.x);
