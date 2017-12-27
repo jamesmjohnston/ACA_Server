@@ -9,6 +9,8 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var map = require('./routes/map');
 
+User = require('./types/user.js');
+
 var app = express();
 users.init();
 console.log("users: "+users.users);
