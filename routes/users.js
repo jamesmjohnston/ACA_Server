@@ -7,7 +7,7 @@ router.get('/move/:dir', function(req, res, next) {
 	var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 	console.log("moving- " + ip);
 	var user = new User(ip);
-	switch (req.params.dir) {
+	switch (parseInt(req.params.dir)) {
 		case 0:
 			user.x--;
 			break;
