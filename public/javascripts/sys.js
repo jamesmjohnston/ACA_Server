@@ -7,14 +7,14 @@ sys.rng = function(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-sys.Rest = function(route) {
+sys.Rest = function(route, json) {
 	return new Promise(function(resolve, reject) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.open('GET', route, true);
-		xhttp.setRequestHeader("Content-type", "text/plain");
+		xhttp.setRequestHeader("Content-type", json ? "application/json" : "text/plain");
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200)
-				resolve(map.readTerrain(this.responseText));				
+				resolve(this.responseText);				
 			else if (this.status == 400)
 				reject(Error("Fetch Failed"));
 		};

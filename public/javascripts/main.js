@@ -24,9 +24,9 @@ function init() {
 	createjs.Ticker.addEventListener("tick", tick);	
 	
 	sys.Rest('map').then(function(result) {
-		map = result;
+		map = map.readTerrain(result);
 		draw.fillGrid(map, container, w, h);
-		sys.Rest('users').then(function(result) {
+		sys.Rest('users', true).then(function(result) {
 				
 		});
 	}, function(err) {
