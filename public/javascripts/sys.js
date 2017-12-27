@@ -7,18 +7,20 @@ sys.rng = function(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-sys.Rest = new Promise(route, function(resolve, reject) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.open('GET', route, true);
-    xhttp.setRequestHeader("Content-type", "text/plain");
-    xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200)
-			resolve(map.readTerrain(this.responseText));				
-		else if (this.status == 400)
-			reject(Error("Fetch Failed"));
-	};
-    xhttp.send();
-});
+sys.Rest = new function(route) {
+	return new Promise(function(resolve, reject) {
+		var xhttp = new XMLHttpRequest();
+		xhttp.open('GET', route, true);
+		xhttp.setRequestHeader("Content-type", "text/plain");
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200)
+				resolve(map.readTerrain(this.responseText));				
+			else if (this.status == 400)
+				reject(Error("Fetch Failed"));
+		};
+		xhttp.send();
+	});
+};
 
 sys.loadJSON = function (filename) {
 	console.log("debug: Loading " + filename + "...");

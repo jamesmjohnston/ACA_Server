@@ -27,7 +27,7 @@ function init() {
 		map = result;
 		draw.fillGrid(map, container, w, h);
 		sys.Rest('users').then(function(result) {
-			
+				
 		});
 	}, function(err) {
 		console.log('map failed');
