@@ -30,7 +30,7 @@ draw.generateGrid = function(stage, width, height) {
 
 draw.drawLine = function(x1, x2, y1, y2) {
 	var line = new createjs.Shape();
-	line.graphics.setStrokeStyle(2).beginStroke("Black");
+	line.graphics.setStrokeStyle(1).beginStroke("Gray");
 	line.graphics.moveTo(x1, y1);
 	line.graphics.lineTo(x2, y2);
 	line.graphics.endStroke();
