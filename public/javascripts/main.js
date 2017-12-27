@@ -16,7 +16,9 @@ function init() {
 	stage = new createjs.Stage("mainCanvas");
 	container = new createjs.Container();
 	stage.addChild(container);
-	stage.addChild(draw.drawSquare(4*GRID_SIZE,2*GRID_SIZE,GRID_SIZE,GRID_SIZE,"Purple"));
+	stage.addChild(draw.drawSquare(4*GRID_SIZE+20,2*GRID_SIZE+20,GRID_SIZE-40,GRID_SIZE-40,"Black"));
+	stage.addChild(draw.drawSquare(4*GRID_SIZE+18,2*GRID_SIZE+18,GRID_SIZE-36,GRID_SIZE-36,"Purple"));
+	
 	
 	draw.generateGrid(container, w, h);
 
