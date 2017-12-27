@@ -16,8 +16,8 @@ function init() {
 	stage = new createjs.Stage("mainCanvas");
 	container = new createjs.Container();
 	stage.addChild(container);
-	stage.addChild(draw.drawSquare(4*GRID_SIZE+19,2*GRID_SIZE+19,GRID_SIZE-38,GRID_SIZE-38,"Black"));
-	stage.addChild(draw.drawSquare(4*GRID_SIZE+20,2*GRID_SIZE+20,GRID_SIZE-40,GRID_SIZE-40,"Purple"));
+	stage.addChild(draw.drawSquare(hCenter - GRID_SIZE + 19,vCenter - GRID_SIZE+19,GRID_SIZE-38,GRID_SIZE-38,"Black"));
+	stage.addChild(draw.drawSquare(hCenter - GRID_SIZE + 20,vCenter - GRID_SIZE+20,GRID_SIZE-40,GRID_SIZE-40,"Purple"));
 	
 	
 
@@ -45,6 +45,8 @@ function resizeCanvas() {
     canvas = document.getElementById("mainCanvas");
 	canvas.height = h = window.innerHeight;
 	canvas.width = w = window.innerWidth;
+	vCenter = h/2;
+	hCenter = w/2;
 }
 
 
