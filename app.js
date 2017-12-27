@@ -9,8 +9,10 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var map = require('./routes/map');
 
+var sys = require('./public/javascripts/sys.js');
 var app = express();
-
+users.init();
+Console.log(users.users);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);

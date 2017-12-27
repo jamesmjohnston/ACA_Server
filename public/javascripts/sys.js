@@ -6,6 +6,7 @@ sys.rng = function(min, max) {
 
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 };
+
 sys.Rest = new Promise(function(resolve, reject) {
     var xhttp = new XMLHttpRequest();
     xhttp.open('GET', 'map', true);
@@ -18,3 +19,39 @@ sys.Rest = new Promise(function(resolve, reject) {
 	};
     xhttp.send();
 });
+
+sys.loadJSON = function (filename) {
+	console.log("debug: Loading " + filename + "...");
+	try { 
+		var data = require('fs').readFileSync(root + '/' +filename +'.txt', 'ascii');
+		if (data.length == 0) {
+			console.log("ERROR: " + filename + " had no data...");
+			return {};
+		} else {
+			console.log("debug: " + filename + " loaded...");
+			return data.length > 0 ? JSON.parse(data): {};
+		}
+	} catch (err) {
+		console.log("ERROR: " + filename + " failed to load");
+			console.log(err);
+		process.exit(-1);
+	}
+};
+
+sys.loadText = function (filename, root) {
+	console.log("debug: Loading " + filename + "...");
+	try { 
+		var data = require('fs').readFileSync(root + '/' +filename +'.txt', 'ascii');
+		if (data.length == 0) {
+			console.log("Warning: " + filename + " had no data...");
+			return "";
+		} else {
+			console.log("debug: " + filename + " loaded...");
+			return data;
+		}
+	} catch (err) {
+		console.log("ERROR: " + filename + " failed to load");
+			console.log(err);
+		process.exit(-1);
+	}
+};
