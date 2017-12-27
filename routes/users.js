@@ -23,8 +23,9 @@ router.get('/move/:dir', function(req, res, next) {
 			user.y--;
 			break;
 	}
+	console.log(user);
 	user.save();
-  res.send(user);
+    res.send(user);
 });
 
 router.get('/', function(req, res, next) {
