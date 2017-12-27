@@ -28,9 +28,9 @@ function init() {
 		draw.fillGrid(map, container, w, h);
 		sys.Rest('users', true).then(function(result) {
 			user = JSON.parse(result);
-			container.x += GRID_SIZE * (50 + user.x);
-			container.y += GRID_SIZE * (50 + user.y);
-			
+			container.x -= GRID_SIZE * (50 + user.x);
+			container.y -= GRID_SIZE * (50 + user.y);
+			stage.update;
 		});
 	}, function(err) {
 		console.log('map failed');
