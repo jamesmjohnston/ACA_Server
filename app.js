@@ -9,7 +9,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var map = require('./routes/map');
 
-User = require('../bin/user.js');
+User = require('./bin/user.js');
 
 var app = express();
 users.init();
