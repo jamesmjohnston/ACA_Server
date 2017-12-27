@@ -20,14 +20,6 @@ draw.drawSquare = function(x, y, width, height, color) {
 	return square
 }
 
-draw.generateGrid = function(stage, width, height) {
-    for (var x = 0; x < width; x += GRID_SIZE)
-		stage.addChild(draw.drawLine(x, x, 0, height));
-	
-    for (var y = 0; y < height; y += GRID_SIZE)
-		stage.addChild(draw.drawLine(0, width, y, y));
-}
-
 draw.drawLine = function(x1, x2, y1, y2) {
 	var line = new createjs.Shape();
 	line.graphics.setStrokeStyle(1).beginStroke("Gray");

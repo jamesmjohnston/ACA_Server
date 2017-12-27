@@ -37,9 +37,6 @@ app.use('/map', map);
 
 function gameLoop() {
 	console.log('saving');
-	for (u in users.users)
-		console.log("user- "+u);
-	
 	sys.saveJSON('users',users.users);
 	setTimeout(gameLoop, 3000);
 }

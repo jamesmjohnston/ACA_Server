@@ -16,7 +16,7 @@ function init() {
 	stage = new createjs.Stage("mainCanvas");
 	container = new createjs.Container();
 	stage.addChild(container);
-	stage.addChild(draw.drawSquare(4*GRID_SIZE+18,2*GRID_SIZE+18,GRID_SIZE-36,GRID_SIZE-36,"Black"));
+	stage.addChild(draw.drawSquare(4*GRID_SIZE+19,2*GRID_SIZE+19,GRID_SIZE-38,GRID_SIZE-38,"Gray"));
 	stage.addChild(draw.drawSquare(4*GRID_SIZE+20,2*GRID_SIZE+20,GRID_SIZE-40,GRID_SIZE-40,"Purple"));
 	
 	
@@ -27,7 +27,6 @@ function init() {
 	sys.Rest('map').then(function(result) {
 		map = map.readTerrain(result);
 		draw.fillGrid(map, container, w, h);
-		//draw.generateGrid(container, w, h);
 		sys.Rest('users', true).then(function(result) {
 			user = JSON.parse(result);
 			container.x -= GRID_SIZE * (50 + user.x);
