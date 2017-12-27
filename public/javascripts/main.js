@@ -28,8 +28,8 @@ function init() {
 		draw.fillGrid(map, container, w, h);
 		sys.Rest('users', true).then(function(result) {
 			user = JSON.parse(result);
-			generateGrid.x += 50 + user.x;
-			generateGrid.x += 50 + user.y;
+			container.x += 50 + user.x;
+			container.x += 50 + user.y;
 			
 		});
 	}, function(err) {
