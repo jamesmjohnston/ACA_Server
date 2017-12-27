@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var sys = require('../bin/sys.js')('/home/ec2-user/node_modules/aca-server/data')
+var sys = require('./bin/sys.js')('/home/ec2-user/node_modules/aca-server/data')
 
 var index = require('./routes/index');
 users = require('./routes/users');
