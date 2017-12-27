@@ -36,7 +36,7 @@ app.use('/map', map);
 
 
 function gameLoop() {
-	System.out.println('saving');
+	console.log('saving');
 	for (u in users.users)
 		console.log("user- "+u);
 	
