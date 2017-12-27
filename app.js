@@ -5,11 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var sys = require('./public/javascripts/sys.js');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var map = require('./routes/map');
 
-var sys = require('./public/javascripts/sys.js');
 var app = express();
 users.init();
 Console.log(users.users);
