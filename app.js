@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var sys = require('../bin/sys.js')('/home/ec2-user/node_modules/aca-server/data')
 
 var index = require('./routes/index');
 users = require('./routes/users');
@@ -32,6 +33,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/map', map);
+
+
+function gameLoop() {
+	sys.saveJSON('users',users.users);
+	setTimeout(gameLoop, 3000);
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
