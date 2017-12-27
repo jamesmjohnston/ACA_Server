@@ -27,7 +27,7 @@ function init() {
 		map = map.readTerrain(result);
 		draw.fillGrid(map, container, w, h);
 		sys.Rest('users', true).then(function(result) {
-				
+			user = JSON.stringify(result);
 		});
 	}, function(err) {
 		console.log('map failed');
