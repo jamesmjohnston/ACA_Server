@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-sys = require('./bin/sys')('/home/ec2-user/node_modules/aca-server/data');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var map = require('./routes/map');
