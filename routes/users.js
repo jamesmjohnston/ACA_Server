@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 router.users = {};
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/move/:dir'', function(req, res, next) {
 	var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 	console.log("moving- " + ip);
 	user = new User(ip);
@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
   res.send(user);
 });
 
-router.get('/move/:dir', function(req, res, next) {
+router.get('/', function(req, res, next) {
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   console.log("fetching- " + ip);
   user = new User(ip);
