@@ -24,13 +24,11 @@ function init() {
 	createjs.Ticker.setFPS(FRAME_RATE);	
 	createjs.Ticker.addEventListener("tick", tick);	
 	
-	sys.Rest('map').then(function(result) {
-		map = map.readTerrain(result);
-		draw.fillGrid(map, container, w, h);
-		sys.Rest('users', true).then(function(result) {
-			user = JSON.parse(result);
-			container.x -= GRID_SIZE * (50 + user.x);
-			container.y -= GRID_SIZE * (50 - user.y);
+	sys.Rest('users', true).then(function(result) {
+		user = JSON.parse(result);
+		sys.Rest('map').then(function(result) {
+			map = map.readTerrain(result);
+			draw.fillGrid(map, user, container, w, h);
 			stage.update;
 		});
 	}, function(err) {
