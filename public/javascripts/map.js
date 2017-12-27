@@ -1,7 +1,6 @@
 var map = {};
 
-map.readTerrain = function(terrainMapName, buildMapName) {
-	var data = sys.loadText(filename);
+map.readTerrain = function(data) {
 	data = data.split('\r\n');
 	
 	var dims = data[0].split('-');
