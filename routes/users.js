@@ -1,4 +1,4 @@
-var sys = require('../bin/sys')('/home/ec2-user/node_modules/aca-server/data')
+var sys = require('../bin/sys.js')('/home/ec2-user/node_modules/aca-server/data')
 var express = require('express');
 var router = express.Router();
 router.users = {};
@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.init = function() {
-	this.users = sys.readJSON('users');
+	this.users = sys.loadJSON('users');
 };
 
 module.exports = router;

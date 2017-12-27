@@ -25,7 +25,7 @@ module.exports = function(root) {
 	
 	module.saveJSON = function(filename, object) {
 		var fs = require('fs');
-		var stream = fs.createWriteStream('./' + root + '/' + filename + ".txt");
+		var stream = fs.createWriteStream('./' + root + '/' + filename + ".json");
 		stream.once('open', function(fd) {
 			stream.write(JSON.stringify(object, null, '\t'));
 			stream.end();
@@ -36,7 +36,7 @@ module.exports = function(root) {
 	module.loadJSON = function (filename) {
 		console.log("debug: Loading " + filename + "...");
 		try { 
-			var data = require('fs').readFileSync(root + '/' +filename +'.txt', 'ascii');
+			var data = require('fs').readFileSync(root + '/' +filename +'.json', 'ascii');
 			if (data.length == 0) {
 				console.log("ERROR: " + filename + " had no data...");
 				return {};
