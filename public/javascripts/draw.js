@@ -9,7 +9,7 @@ draw.fillGrid = function(map, user, stage, width, height) {
 		for (var y = 50 - user.y-10; y < 50 - user.y+10; y ++) {
 			
             var color = colors[map[x][y]];
-            stage.addChild(draw.drawSquare(hCenter-GRID_SIZE/2+x*GRID_SIZE,yCenter-GRID_SIZE/2+y*GRID_SIZE, GRID_SIZE, GRID_SIZE, color));
+            stage.addChild(draw.drawSquare(hCenter-GRID_SIZE/2+x*GRID_SIZE,vCenter-GRID_SIZE/2+y*GRID_SIZE, GRID_SIZE, GRID_SIZE, color));
         }
     }
 }
