@@ -7,7 +7,7 @@ sys.rng = function(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-sys.Rest = new function(route) {
+sys.Rest = function(route) {
 	return new Promise(function(resolve, reject) {
 		var xhttp = new XMLHttpRequest();
 		xhttp.open('GET', route, true);
