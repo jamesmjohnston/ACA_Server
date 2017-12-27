@@ -11,7 +11,7 @@ var map = require('./routes/map');
 
 var app = express();
 users.init();
-Console.log(users.users);
+console.log("users: "users.users);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);
