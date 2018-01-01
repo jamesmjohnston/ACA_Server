@@ -34,8 +34,11 @@ draw.drawOtherUsers = function(data) {
 			} else
 				user.drawn = false;
 		} else {
-			users[i].x = GRID_SIZE * data[i].x;
-			users[i].y = -GRID_SIZE * data[i].y;
+			
+			createjs.Tween.get(users[i]).to({x:users[i].x+GRID_SIZE}, MOVE_SPEED).call();
+			createjs.Tween.get(users[i]).to({y:users[i].y+GRID_SIZE}, MOVE_SPEED).call();
+			//users[i].x = GRID_SIZE * data[i].x;
+			//users[i].y = -GRID_SIZE * data[i].y;
 		}
 	}
 }

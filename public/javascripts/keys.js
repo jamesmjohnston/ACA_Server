@@ -16,7 +16,6 @@ keys.handleKeys = function(container) {
 	if (!_.isEmpty(keyState)) {
 		if (!moving) {
 			if (keyState[37] || keyState[65]){
-				//users['1.1.1.1'].x -= GRID_SIZE;
 				this.moveCall(container, 0);
 				user.x--;
 				createjs.Tween.get(container).to({x:container.x+GRID_SIZE}, MOVE_SPEED).call(handleComplete);
