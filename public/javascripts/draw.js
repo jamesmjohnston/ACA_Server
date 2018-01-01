@@ -33,6 +33,9 @@ draw.drawOtherUsers = function(data) {
 				container.addChild(user);
 			} else
 				user.drawn = false;
+		} else {
+			users[i].x += GRID_SIZE;
+			
 		}
 	}
 }
