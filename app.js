@@ -4,13 +4,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var sys = require('./bin/sys.js')('/home/ec2-user/node_modules/aca-server/data')
+var Map = require('./bin/cMap.js');
+var Poll = require('./bin/cPoll.js');
+var User = require('./bin/cUser.js');
+_ = require('lodash');
+sys = require('./bin/cSys.js')('./data')
+var polls = new Poll();
+var mainGrid = new Map('map');
 
 var index = require('./routes/index');
-users = require('./routes/users');
-var map = require('./routes/map');
-
-User = require('./bin/user.js');
+users = require('./routes/users')(polls, mainGrid, User);
+var poll = require('./routes/poll')(polls, User);
+var map = require('./routes/map')(polls, mainGrid, User);
 
 var app = express();
 users.init();
@@ -32,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/poll', poll);
 app.use('/map', map);
 
 

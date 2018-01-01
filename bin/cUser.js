@@ -1,6 +1,5 @@
-var sys = require('../bin/sys.js')('/home/ec2-user/node_modules/aca-server/data')
-
 module.exports = User;
+var distance = require('euclidean-distance')
 
 function User(user) {
 	if (users.users[user])
@@ -8,6 +7,21 @@ function User(user) {
 	else
 		this.createUser(user);
 };
+
+User.prototype.checkLocal = function(users) {
+	var updateList = {};
+	for (var i in users) {
+		if (this.id != i) {
+			var otherUser = users[i];
+			var dist = distance([otherUser.x, otherUser.y], [this.x, this.y]);
+			if (dist < 20) {
+				updateList[i]={x:otherUser.x, y:otherUser.y};
+			}
+		}
+	}
+	return updateList;
+	
+}
 
 User.prototype.setUser =  function(user) {
 	this.id = user.id;
@@ -22,6 +36,7 @@ User.prototype.setUser =  function(user) {
 	this.verbose = user.verbose;
 	this.inactive = user.inactive;
 	this.equiped = user.equiped;
+	this.chunks = user.chunks;
 };
 
 User.prototype.createUser =  function(user) {
@@ -36,9 +51,18 @@ User.prototype.createUser =  function(user) {
 	this.money = 0;
 	this.verbose = true;
 	this.inactive = false;
+	this.chunks = {};
 	users.users[user] = this;
     this.save();
 };
+
+User.prototype.getChunk = function() {
+	var chunk = {};
+	chunk.x = Math.floor(this.x/16);
+	chunk.y = Math.floor(this.y/16);
+	return chunk;
+	
+}
 
 User.prototype.save = function () {
 	users.users[this.id] = this;

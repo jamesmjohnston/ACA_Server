@@ -1,4 +1,7 @@
 var keyState = {};
+var squares = {};
+var container, user, map, users = {};
+
 window.addEventListener('keydown',function(e){
     keyState[e.keyCode || e.which] = true;
 },true);
@@ -11,25 +14,24 @@ function handleComplete() {
 }
 
 function init() {
-	moving = false;
+	moving = false;	
 	resizeCanvas();
 	stage = new createjs.Stage("mainCanvas");
 	container = new createjs.Container();
+    grid = new Grid();
 	stage.addChild(container);
-	stage.addChild(draw.drawSquare(hCenter - GRID_SIZE/2 + 19,vCenter - GRID_SIZE/2+19,GRID_SIZE-38,GRID_SIZE-38,"Black"));
-	stage.addChild(draw.drawSquare(hCenter - GRID_SIZE/2 + 20,vCenter - GRID_SIZE/2+20,GRID_SIZE-40,GRID_SIZE-40,"Purple"));
-	
-	
-
+	stage.addChild(draw.drawUser(0, 0, "Purple"));
 	createjs.Ticker.setFPS(FRAME_RATE);	
 	createjs.Ticker.addEventListener("tick", tick);	
-	
 	sys.Rest('users', true).then(function(result) {
-		user = JSON.parse(result);
+		user = result;
 		sys.Rest('map').then(function(result) {
-			map = map.readTerrain(result);
-			draw.fillGrid(map, user, container, w, h);
-			stage.update;
+			map = new Grid(result);
+			container.x -= GRID_SIZE * user.x;
+			container.y += GRID_SIZE * user.y;
+			draw.fillGrid(map, grid, container, w, h);
+			sys.LongPoll(true);
+			stage.update();
 		});
 	}, function(err) {
 		console.log('map failed');

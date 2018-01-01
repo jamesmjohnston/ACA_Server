@@ -1,12 +1,16 @@
-var sys = require('../bin/sys.js')('/home/ec2-user/node_modules/aca-server/data')
-var express = require('express');
-var router = express.Router();
+module.exports = function(poll, map, User) {
+	var express = require('express');
+	var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  var txt = sys.loadText('map');
-  res.send(txt);
-});
+	/* GET users listing. */
+	router.get('/', function(req, res, next) {
+	  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+	  console.log("mapping- " + ip);
+	  user = new User(ip);
+	  user.chunks = map.getVisibleChunks(user);
+	  user.save();
+	  res.send(map.initView(user));
+	});
 
-module.exports = router;
-
+   return router;
+}

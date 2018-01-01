@@ -7,20 +7,38 @@ sys.rng = function(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-sys.Rest = function(route, json) {
+sys.Rest = function(route) {
 	return new Promise(function(resolve, reject) {
 		var xhttp = new XMLHttpRequest();
-		xhttp.open('GET', route, true);
-		xhttp.setRequestHeader("Content-type", json ? "application/json" : "text/plain");
+		xhttp.open('GET', 'http://localhost:3000/'+route, true);
+		xhttp.setRequestHeader("Content-type","application/json");
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200)
-				resolve(this.responseText);				
+				resolve(JSON.parse(this.responseText));				
 			else if (this.status == 400)
 				reject(Error("Fetch Failed"));
 		};
 		xhttp.send();
 	});
 };
+
+sys.LongPoll = function(init) {
+	var xhttp = new XMLHttpRequest();
+	xhttp.timeout = 60000;
+	xhttp.responseType = 'text';
+	
+	xhttp.onload = function(e2){
+		draw.drawOtherUsers(JSON.parse(this.responseText));
+		sys.LongPoll();
+	}
+	
+	xhttp.ontimeout = function(){
+		
+	}
+		
+	xhttp.open('GET', "http://localhost:3000/poll" + (init ? "/init" : ""), true);
+	xhttp.send();
+}
 
 sys.loadJSON = function (filename) {
 	console.log("debug: Loading " + filename + "...");
