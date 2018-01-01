@@ -39,6 +39,7 @@ module.exports = function(polls, map, User) {
 				view[chunks[i]] = map.data[chunks[i]];
 			}
 		}
+		user.save();
 
 		if (!_.isEmpty(updateList = user.checkLocal(router.users))) 
 			polls.update(ip, updateList);
@@ -52,7 +53,6 @@ module.exports = function(polls, map, User) {
 		}
 		
 		
-		user.save();
 		res.send(view);
 	});
 
