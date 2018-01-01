@@ -34,8 +34,8 @@ draw.drawOtherUsers = function(data) {
 			} else
 				user.drawn = false;
 		} else {
-			users[i].x += GRID_SIZE;
-			
+			users[i].x = GRID_SIZE * data[i].x;
+			users[i].y = GRID_SIZE * data[i].y;
 		}
 	}
 }
@@ -43,8 +43,10 @@ draw.drawOtherUsers = function(data) {
 draw.drawUser = function(x, y, color) {
 	
 	var usr = new createjs.Container();
-	usr.addChild(this.drawSquare(hCenter + x*GRID_SIZE - GRID_SIZE/2 + 19, vCenter - y*GRID_SIZE - GRID_SIZE/2 + 19, GRID_SIZE - 38, GRID_SIZE - 38, "Black"));
-	usr.addChild(this.drawSquare(hCenter + x*GRID_SIZE - GRID_SIZE/2 + 20, vCenter - y*GRID_SIZE - GRID_SIZE/2 + 20, GRID_SIZE - 40, GRID_SIZE - 40, color));
+	usr.addChild(this.drawSquare(hCenter - GRID_SIZE/2 + 19, vCenter - GRID_SIZE/2 + 19, GRID_SIZE - 38, GRID_SIZE - 38, "Black"));
+	usr.addChild(this.drawSquare(hCenter - GRID_SIZE/2 + 20, vCenter - GRID_SIZE/2 + 20, GRID_SIZE - 40, GRID_SIZE - 40, color));
+	usr.x += x*GRID_SIZE;
+	usr.y += y*GRID_SIZE;
 	return usr;
 }
 
