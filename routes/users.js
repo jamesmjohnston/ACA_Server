@@ -43,6 +43,15 @@ module.exports = function(polls, map, User) {
 		if (!_.isEmpty(updateList = user.checkLocal(router.users))) 
 			polls.update(ip, updateList);
 		
+		var teather = {};
+		for (var tip in updateList) {
+			var teatherUser = new User(tip);
+			if (!_.isEmpty(teather = teatherUser.checkLocal(router.users))) 
+				polls.update(tip, teather);
+				
+		}
+		
+		
 		user.save();
 		res.send(view);
 	});
