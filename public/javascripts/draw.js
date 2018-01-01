@@ -35,7 +35,7 @@ draw.drawOtherUsers = function(data) {
 				user.drawn = false;
 		} else {
 			users[i].x = GRID_SIZE * data[i].x;
-			users[i].y = GRID_SIZE * data[i].y;
+			users[i].y = -GRID_SIZE * data[i].y;
 		}
 	}
 }
