@@ -28,5 +28,23 @@
 		"verbose": true,
 		"money": 0,
 		"inactive": false
+	},
+	"::1": {
+		"id": "::1",
+		"x": -3,
+		"y": -3,
+		"hunger": 100,
+		"health": 100,
+		"walked": 12,
+		"inventory": [],
+		"verbose": true,
+		"money": 0,
+		"inactive": false,
+		"chunks": [
+			"-1:-1",
+			"-1:0",
+			"0:-1",
+			"0:0"
+		]
 	}
 }
