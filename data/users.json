@@ -31,19 +31,21 @@
 	},
 	"::1": {
 		"id": "::1",
-		"x": -3,
-		"y": -3,
+		"x": -4,
+		"y": -8,
 		"hunger": 100,
 		"health": 100,
-		"walked": 12,
+		"walked": 76,
 		"inventory": [],
 		"verbose": true,
 		"money": 0,
 		"inactive": false,
 		"chunks": [
+			"-1:-2",
 			"-1:-1",
-			"-1:0",
+			"0:-2",
 			"0:-1",
+			"-1:0",
 			"0:0"
 		]
 	}
