@@ -4,14 +4,14 @@ module.exports = function(polls, User) {
 	var router = express.Router();
 
 	
-	router.get('/:cmd', function(req, res, next) {	
+	router.get('/init', function(req, res, next) {	
 		polls.add(req, res);
-		if (req.params.cmd == "init") {
-			var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-			polls.data[ip].data = {};
-			var user = new User(ip), updateList = {};
+		if (req.headers.authorization) {
+			var id = req.headers.authorization;//req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+			polls.data[id].data = {};
+			var user = new User(id), updateList = {};
 			if (!_.isEmpty(updateList = user.checkLocal(users.users))) 
-				polls.update(ip, updateList);
+				polls.update(id, updateList);
 			
 		}
 	});

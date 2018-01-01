@@ -4,9 +4,9 @@ module.exports = function(poll, map, User) {
 
 	/* GET users listing. */
 	router.get('/', function(req, res, next) {
-	  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-	  console.log("mapping- " + ip);
-	  user = new User(ip);
+	  var id = req.headers.authorization;//req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+	  console.log("mapping- " + id);
+	  user = new User(id);
 	  user.chunks = map.getVisibleChunks(user);
 	  user.save();
 	  res.send(map.initView(user));

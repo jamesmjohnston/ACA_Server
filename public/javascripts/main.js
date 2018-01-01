@@ -2,6 +2,8 @@ var keyState = {};
 var squares = {};
 var container, user, map, users = {};
 
+var username = prompt("Enter username");
+
 window.addEventListener('keydown',function(e){
     keyState[e.keyCode || e.which] = true;
 },true);

@@ -13,32 +13,37 @@ draw.fillGrid = function(map, squares, container, width, height) {
         }
     }
 	for (var i in users) {
-		
-		if (!users[i].drawn && grid.get(users[i].coord.x, users[i].coord.y)) {
-			users[i].drawn = true;
-			container.addChild(users[i]);
+		if (grid.get(users[i].coord.x, users[i].coord.y)) {
+			if (!users[i].drawn ) {
+				users[i].drawn = true;
+				container.addChild(users[i]);
+			} else {
+				
+				container.setChildIndex(users[i], container.getNumChildren() - 1);
+			}
+			
 		}
-		container.setChildIndex(users[i], container.getNumChildren() - 1);
+		
 	}
 }
 
 draw.drawOtherUsers = function(data) {
 	for (var i in data) {
-		if (!_.has(users,i)) {
-			var user = draw.drawUser(data[i].x, data[i].y, "Blue");
-			users[i] = user;
-			user.coord = {x:data[i].x, y: data[i].y};
-			if (grid.get(data[i].x, data[i].y)) {
-				user.drawn = true;
-				container.addChild(user);
-			} else
-				user.drawn = false;
-		} else {
-			
-			createjs.Tween.get(users[i]).to({x:data[i].x*GRID_SIZE}, MOVE_SPEED).call();
-			createjs.Tween.get(users[i]).to({y:-data[i].y*GRID_SIZE}, MOVE_SPEED).call();
-			//users[i].x = GRID_SIZE * data[i].x;
-			//users[i].y = -GRID_SIZE * data[i].y;
+		if (i != username) {
+			if (!_.has(users,i)) {
+				var user = draw.drawUser(data[i].x, data[i].y, "Blue");
+				users[i] = user;
+				user.coord = {x:data[i].x, y: data[i].y};
+				if (grid.get(data[i].x, data[i].y)) {
+					user.drawn = true;
+					container.addChild(user);
+				} else
+					user.drawn = false;
+			} else if (users[i].drawn) {
+				
+				createjs.Tween.get(users[i]).to({x:data[i].x*GRID_SIZE}, MOVE_SPEED).call();
+				createjs.Tween.get(users[i]).to({y:-data[i].y*GRID_SIZE}, MOVE_SPEED).call();
+			}
 		}
 	}
 }

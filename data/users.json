@@ -1,50 +1,40 @@
 {
-	"127.0.0.1": {
-		"id": "127.0.0.1",
-		"x": 1,
-		"y": 52,
+	"james": {
+		"id": "james",
+		"x": 9,
+		"y": -11,
 		"hunger": 100,
 		"health": 100,
-		"walked": 1254,
+		"walked": 50,
 		"inventory": [],
 		"verbose": true,
 		"money": 0,
 		"inactive": false,
 		"chunks": [
-			"-1:2",
-			"-1:3",
-			"0:2",
-			"0:3"
+			"0:-2",
+			"0:-1",
+			"1:-2",
+			"1:-1"
 		]
 	},
-	"1.1.1.1": {
-		"id": "1.1.1.1",
-		"x": 4,
-		"y": 50,
+	"marshall": {
+		"id": "marshall",
+		"x": 8,
+		"y": -10,
 		"hunger": 100,
 		"health": 100,
-		"walked": 0,
-		"inventory": [],
-		"verbose": true,
-		"money": 0,
-		"inactive": false
-	},
-	"::1": {
-		"id": "::1",
-		"x": -4,
-		"y": -8,
-		"hunger": 100,
-		"health": 100,
-		"walked": 76,
+		"walked": 38,
 		"inventory": [],
 		"verbose": true,
 		"money": 0,
 		"inactive": false,
 		"chunks": [
-			"-1:-1",
-			"-1:0",
+			"0:-2",
 			"0:-1",
-			"0:0"
+			"1:-2",
+			"1:-1",
+			"-1:-2",
+			"-1:-1"
 		]
 	}
 }

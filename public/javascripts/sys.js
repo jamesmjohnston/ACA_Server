@@ -18,13 +18,14 @@ sys.Rest = function(route) {
 			else if (this.status == 400)
 				reject(Error("Fetch Failed"));
 		};
+		xhttp.setRequestHeader("Authorization", username);
 		xhttp.send();
 	});
 };
 
 sys.LongPoll = function(init) {
 	var xhttp = new XMLHttpRequest();
-	xhttp.timeout = 60000;
+	xhttp.timeout = 30000;
 	xhttp.responseType = 'text';
 	
 	xhttp.onload = function(e2){
@@ -37,6 +38,7 @@ sys.LongPoll = function(init) {
 	}
 		
 	xhttp.open('GET', "poll" + (init ? "/init" : ""), true);
+	xhttp.setRequestHeader("Authorization", username);
 	xhttp.send();
 }
 

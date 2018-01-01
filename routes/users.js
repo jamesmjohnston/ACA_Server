@@ -5,9 +5,9 @@ module.exports = function(polls, map, User) {
 	router.users = {};
 	/* GET users listing. */
 	router.get('/move/:dir', function(req, res, next) {
-		var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-		console.log("moving- " + ip);
-		var user = new User(ip);
+		var id = req.headers.authorization;//req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+		console.log("moving- " + id);
+		var user = new User(id);
 		switch (parseInt(req.params.dir)) {
 			case 0:
 				user.walked++;
@@ -42,7 +42,7 @@ module.exports = function(polls, map, User) {
 		user.save();
 
 		if (!_.isEmpty(updateList = user.checkLocal(router.users))) 
-			polls.update(ip, updateList);
+			polls.update(id, updateList);
 		
 		var teather = {};
 		for (var tip in updateList) {
@@ -58,9 +58,9 @@ module.exports = function(polls, map, User) {
 
 	
 	router.get('/', function(req, res, next) {
-	  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-	  console.log("fetching- " + ip);
-	  res.send(new User(ip));
+	  var id = req.headers.authorization;//req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+	  console.log("fetching- " + id);
+	  res.send(new User(id));
 	});
 
 	router.init = function() {
