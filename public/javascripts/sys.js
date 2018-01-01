@@ -10,7 +10,7 @@ sys.rng = function(min, max) {
 sys.Rest = function(route) {
 	return new Promise(function(resolve, reject) {
 		var xhttp = new XMLHttpRequest();
-		xhttp.open('GET', 'http://localhost:3000/'+route, true);
+		xhttp.open('GET', route, true);
 		xhttp.setRequestHeader("Content-type","application/json");
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200)
@@ -36,7 +36,7 @@ sys.LongPoll = function(init) {
 		
 	}
 		
-	xhttp.open('GET', "http://localhost:3000/poll" + (init ? "/init" : ""), true);
+	xhttp.open('GET', "poll" + (init ? "/init" : ""), true);
 	xhttp.send();
 }
 
