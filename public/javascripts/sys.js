@@ -29,8 +29,8 @@ sys.LongPoll = function(init, draw) {
 	xhttp.responseType = 'text';
 	
 	xhttp.onload = function(e2){
-		draw.drawOtherUsers(JSON.parse(this.responseText), draw);
-		sys.LongPoll();
+		draw.drawOtherUsers(JSON.parse(this.responseText), users);
+		sys.LongPoll(false, draw);
 	}
 	
 	xhttp.ontimeout = function(){

@@ -5,8 +5,8 @@ keys.moveCall = function(draw, dir) {
 	sys.Rest('users/move/' + dir).then(function (result) {
 		if (!_.isEmpty(result)) {
 			for (var i in result)
-				if (!_.has(map.data, i))
-					map.data[i] = result[i];
+				if (!_.has(draw.map.data, i))
+					draw.map.data[i] = result[i];
 		}
 		draw.fillGrid();
 	});
