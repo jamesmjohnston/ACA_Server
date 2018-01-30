@@ -1,5 +1,6 @@
 var keyState = {};
 var squares = {};
+var stage = {};
 var container, user, users = {};
 
 var username = prompt("Enter username");
@@ -22,7 +23,7 @@ function init() {
     var stDraw = new Draw(stage);
 	stDraw.drawUser(0, 0, "Purple");
 	createjs.Ticker.setFPS(FRAME_RATE);	
-	createjs.Ticker.addEventListener("tick", tick(stage));
+	createjs.Ticker.addEventListener("tick", tick());
 	
 	sys.Rest('users', true).then(function(result) {
 		user = result;
@@ -43,7 +44,7 @@ function init() {
 	});
 }
 
-function tick(stage) {
+function tick() {
     keys.handleKeys(stage);
     stage.update();
 }
