@@ -1,64 +1,68 @@
-var draw = {};
 var colors = ["#2E7D32", "#DAF7A6", "#515A5A", "#21618C"];
 
-draw.fillGrid = function(map, squares, container, width, height) {
-	
+function Draw(target, map, grid) {
+	this.target = target;
+	this.map = map;
+	this.grid = grid;
+}
+
+Draw.prototype.fillGrid = function() {
     for (var x = user.x-2; x < user.x+3; x++) {
 		for (var y =user.y-2; y < user.y+3; y ++) {
-			if (!grid.get(x,y)) {
-				var squ = draw.drawSquare(hCenter-GRID_SIZE/2+x*GRID_SIZE,vCenter-GRID_SIZE/2-y*GRID_SIZE, GRID_SIZE, GRID_SIZE, colors[map.get(x,y)]);
-				grid.set(x, y, squ);
-				container.addChild(squ);
+			if (!this.grid.get(x,y)) {
+				var squ = this.drawSquare(hCenter-GRID_SIZE/2+x*GRID_SIZE,vCenter-GRID_SIZE/2-y*GRID_SIZE, GRID_SIZE, GRID_SIZE, colors[this.map.get(x,y)]);
+				thisgrid.set(x, y, squ);
+				this.target.addChild(squ);
 			}
         }
     }
-	for (var i in users) {
-		if (grid.get(users[i].coord.x, users[i].coord.y)) {
-			if (!users[i].drawn ) {
-				users[i].drawn = true;
-				container.addChild(users[i]);
-			} else {
-				
-				container.setChildIndex(users[i], container.getNumChildren() - 1);
-			}
+	refreshUserList(target, users);
+}
+
+Draw.prototype.refreshUserList(userList) {
+	for (var i in userList) {
+		if (this.grid.get(userList[i].coord.x, userList[i].coord.y)) {
+			if (!userList[i].drawn ) {
+				userList[i].drawn = true;
+				this.target.addChild(userList[i]);
+			} else
+				this.target.setChildIndex(userList[i], this.target.getNumChildren() - 1);
 			
 		}
-		
 	}
 }
 
-draw.drawOtherUsers = function(data) {
+Draw.prototype.drawOtherUsers = function(data, userList) {
 	for (var i in data) {
 		if (i != username) {
-			if (!_.has(users,i)) {
-				var user = draw.drawUser(data[i].x, data[i].y, "Blue");
-				users[i] = user;
+			if (!_.has(userList,i)) {
+				var user = this.drawUser(data[i].x, data[i].y, "Blue");
+				userList[i] = user;
 				user.coord = {x:data[i].x, y: data[i].y};
-				if (grid.get(data[i].x, data[i].y)) {
+				if (this.grid.get(data[i].x, data[i].y)) {
 					user.drawn = true;
 					container.addChild(user);
 				} else
 					user.drawn = false;
-			} else if (users[i].drawn) {
+			} else if (userList[i].drawn) {
 				
-				createjs.Tween.get(users[i]).to({x:data[i].x*GRID_SIZE}, MOVE_SPEED).call();
-				createjs.Tween.get(users[i]).to({y:-data[i].y*GRID_SIZE}, MOVE_SPEED).call();
+				createjs.Tween.get(userList[i]).to({x:data[i].x*GRID_SIZE}, MOVE_SPEED).call();
+				createjs.Tween.get(userList[i]).to({y:-data[i].y*GRID_SIZE}, MOVE_SPEED).call();
 			}
 		}
 	}
 }
 
-draw.drawUser = function(x, y, color) {
-	
+Draw.prototype.drawUser = function(target, x, y, color) {
 	var usr = new createjs.Container();
 	usr.addChild(this.drawSquare(hCenter - GRID_SIZE/2 + 19, vCenter - GRID_SIZE/2 + 19, GRID_SIZE - 38, GRID_SIZE - 38, "Black"));
 	usr.addChild(this.drawSquare(hCenter - GRID_SIZE/2 + 20, vCenter - GRID_SIZE/2 + 20, GRID_SIZE - 40, GRID_SIZE - 40, color));
 	usr.x += x*GRID_SIZE;
 	usr.y += y*GRID_SIZE;
-	return usr;
+	target.addChild(usr);
 }
 
-draw.drawSquare = function(x, y, width, height, color, outline) {
+Draw.prototype.drawSquare = function(x, y, width, height, color, outline) {
 	var square = new createjs.Shape();
 	square.graphics.snapToPixil = true;
 	square.graphics.beginFill(color);
@@ -68,7 +72,7 @@ draw.drawSquare = function(x, y, width, height, color, outline) {
 	return square
 }
 
-draw.drawLine = function(x1, x2, y1, y2) {
+Draw.drawLine = function(x1, x2, y1, y2) {
 	var line = new createjs.Shape();
 	line.graphics.setStrokeStyle(1).beginStroke("Gray");
 	line.graphics.moveTo(x1, y1);

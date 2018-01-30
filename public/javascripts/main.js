@@ -1,6 +1,6 @@
 var keyState = {};
 var squares = {};
-var container, user, map, users = {};
+var container, user, users = {};
 
 var username = prompt("Enter username");
 
@@ -16,22 +16,25 @@ function handleComplete() {
 }
 
 function init() {
-	moving = false;	
 	resizeCanvas();
-	stage = new createjs.Stage("mainCanvas");
-	container = new createjs.Container();
-    grid = new Grid();
-	stage.addChild(container);
-	stage.addChild(draw.drawUser(0, 0, "Purple"));
+	moving = false;
+	var stage = new createjs.Stage("mainCanvas");
+    var stDraw = new Draw(stage);
+	stDraw.drawUser(0, 0, "Purple");
 	createjs.Ticker.setFPS(FRAME_RATE);	
-	createjs.Ticker.addEventListener("tick", tick);	
+	createjs.Ticker.addEventListener("tick", tick);
+	
 	sys.Rest('users', true).then(function(result) {
 		user = result;
 		sys.Rest('map').then(function(result) {
-			map = new Grid(result);
+			var map = new Grid(result);
+			var container = new createjs.Container();
+			stage.addChild(container);
+			var ctDraw = new Draw(container, map, new Grid());
 			container.x -= GRID_SIZE * user.x;
 			container.y += GRID_SIZE * user.y;
-			draw.fillGrid(map, grid, container, w, h);
+			
+			draw.fillGrid();
 			sys.LongPoll(true);
 			stage.update();
 		});

@@ -23,7 +23,7 @@ sys.Rest = function(route) {
 	});
 };
 
-sys.LongPoll = function(init) {
+sys.LongPoll = function(init, draw) {
 	var xhttp = new XMLHttpRequest();
 	xhttp.timeout = 30000;
 	xhttp.responseType = 'text';
