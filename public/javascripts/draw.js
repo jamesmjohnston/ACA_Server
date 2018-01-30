@@ -19,7 +19,7 @@ Draw.prototype.fillGrid = function() {
 	refreshUserList(target, users);
 }
 
-Draw.prototype.refreshUserList(userList) {
+Draw.prototype.refreshUserList =  function(userList) {
 	for (var i in userList) {
 		if (this.grid.get(userList[i].coord.x, userList[i].coord.y)) {
 			if (!userList[i].drawn ) {
