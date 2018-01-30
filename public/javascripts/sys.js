@@ -29,7 +29,7 @@ sys.LongPoll = function(init, draw) {
 	xhttp.responseType = 'text';
 	
 	xhttp.onload = function(e2){
-		draw.drawOtherUsers(JSON.parse(this.responseText));
+		draw.drawOtherUsers(JSON.parse(this.responseText), draw);
 		sys.LongPoll();
 	}
 	

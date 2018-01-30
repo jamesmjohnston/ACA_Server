@@ -22,7 +22,7 @@ function init() {
     var stDraw = new Draw(stage);
 	stDraw.drawUser(0, 0, "Purple");
 	createjs.Ticker.setFPS(FRAME_RATE);	
-	createjs.Ticker.addEventListener("tick", tick);
+	createjs.Ticker.addEventListener("tick", tick(stage));
 	
 	sys.Rest('users', true).then(function(result) {
 		user = result;
@@ -34,8 +34,8 @@ function init() {
 			container.x -= GRID_SIZE * user.x;
 			container.y += GRID_SIZE * user.y;
 			
-			draw.fillGrid();
-			sys.LongPoll(true);
+			ctDraw.fillGrid();
+			sys.LongPoll(true, ctDraw);
 			stage.update();
 		});
 	}, function(err) {
@@ -43,8 +43,8 @@ function init() {
 	});
 }
 
-function tick(event) {
-	keys.handleKeys(container);
+function tick(stage) {
+    keys.handleKeys(stage);
     stage.update();
 }
 

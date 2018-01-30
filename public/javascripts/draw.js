@@ -11,12 +11,12 @@ Draw.prototype.fillGrid = function() {
 		for (var y =user.y-2; y < user.y+3; y ++) {
 			if (!this.grid.get(x,y)) {
 				var squ = this.drawSquare(hCenter-GRID_SIZE/2+x*GRID_SIZE,vCenter-GRID_SIZE/2-y*GRID_SIZE, GRID_SIZE, GRID_SIZE, colors[this.map.get(x,y)]);
-				thisgrid.set(x, y, squ);
+				this.grid.set(x, y, squ);
 				this.target.addChild(squ);
 			}
         }
     }
-	refreshUserList(target, users);
+	this.refreshUserList(users);
 }
 
 Draw.prototype.refreshUserList =  function(userList) {
@@ -41,7 +41,7 @@ Draw.prototype.drawOtherUsers = function(data, userList) {
 				user.coord = {x:data[i].x, y: data[i].y};
 				if (this.grid.get(data[i].x, data[i].y)) {
 					user.drawn = true;
-					container.addChild(user);
+					this.target.addChild(user);
 				} else
 					user.drawn = false;
 			} else if (userList[i].drawn) {
@@ -59,7 +59,7 @@ Draw.prototype.drawUser = function(x, y, color) {
 	usr.addChild(this.drawSquare(hCenter - GRID_SIZE/2 + 20, vCenter - GRID_SIZE/2 + 20, GRID_SIZE - 40, GRID_SIZE - 40, color));
 	usr.x += x*GRID_SIZE;
 	usr.y += y*GRID_SIZE;
-	this.target.addChild(usr);
+        return usr;
 }
 
 Draw.prototype.drawSquare = function(x, y, width, height, color, outline) {
