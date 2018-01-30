@@ -1,20 +1,20 @@
 {
 	"james": {
 		"id": "james",
-		"x": 9,
-		"y": -11,
+		"x": -1,
+		"y": -12,
 		"hunger": 100,
 		"health": 100,
-		"walked": 50,
+		"walked": 101,
 		"inventory": [],
 		"verbose": true,
 		"money": 0,
 		"inactive": false,
 		"chunks": [
+			"-1:-2",
+			"-1:-1",
 			"0:-2",
-			"0:-1",
-			"1:-2",
-			"1:-1"
+			"0:-1"
 		]
 	},
 	"marshall": {

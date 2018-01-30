@@ -1,6 +1,7 @@
 var keyState = {};
 var squares = {};
-var container, user, users = {};
+var stage = {};
+var container, user, ctDraw, users = {};
 
 var username = prompt("Enter username");
 
@@ -12,40 +13,39 @@ window.addEventListener('keyup',function(e){
 },true);
 
 function handleComplete() {
-	moving = false;
+    moving = false;
+}
+
+function tick() {
+    keys.handleKeys(ctDraw);
+    stage.update();
 }
 
 function init() {
 	resizeCanvas();
 	moving = false;
-	var stage = new createjs.Stage("mainCanvas");
-    var stDraw = new Draw(stage);
+	stage = new createjs.Stage("mainCanvas");
+        var stDraw = new Draw(stage);
 	stDraw.drawUser(0, 0, "Purple");
-	createjs.Ticker.setFPS(FRAME_RATE);	
-	createjs.Ticker.addEventListener("tick", tick(stage));
-	
+        stage.update();
 	sys.Rest('users', true).then(function(result) {
 		user = result;
 		sys.Rest('map').then(function(result) {
 			var map = new Grid(result);
 			var container = new createjs.Container();
 			stage.addChild(container);
-			var ctDraw = new Draw(container, map, new Grid());
+			ctDraw = new Draw(container, map, new Grid());
 			container.x -= GRID_SIZE * user.x;
 			container.y += GRID_SIZE * user.y;
 			
 			ctDraw.fillGrid();
 			sys.LongPoll(true, ctDraw);
-			stage.update();
+	                createjs.Ticker.setFPS(FRAME_RATE);	
+	                createjs.Ticker.addEventListener("tick", tick);
 		});
 	}, function(err) {
 		console.log('map failed');
 	});
-}
-
-function tick(stage) {
-    keys.handleKeys(stage);
-    stage.update();
 }
 
 function resizeCanvas() {
