@@ -1,4 +1,4 @@
-var sys = {};
+var sys = {init : true};
 
 sys.rng = function(min, max) {
     if (min.typeof === 'undefined') { min = 0 };
@@ -23,7 +23,7 @@ sys.Rest = function(route) {
     });
 };
 
-sys.LongPoll = function(init, draw) {
+sys.LongPoll = function(draw) {
     var xhttp = new XMLHttpRequest();
     xhttp.timeout = 30000;
     xhttp.responseType = 'text';
@@ -33,13 +33,16 @@ sys.LongPoll = function(init, draw) {
         sys.LongPoll(false, draw);
 	}
 	
-	xhttp.ontimeout = function(){
-		
+	xhttp.ontimeout = function() {
+	    sys.LongPoll(draw);	
 	}
 		
 	xhttp.open('GET', "poll" + (init ? "/init" : ""), true);
 	xhttp.setRequestHeader("Authorization", sys.username);
 	xhttp.send();
+
+    if (init)
+        init = false;
 }
 
 sys.loadJSON = function (filename) {

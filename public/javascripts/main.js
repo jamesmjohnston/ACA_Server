@@ -1,39 +1,33 @@
 var keyState = {};
 var squares = {};
-var stage = {};
-var container, user, ctDraw, users = {};
-var container, users = {};
-
-
-function handleComplete() {
-    moving = false;
-}
+var ctDraw, users = {};
 
 function tick() {
-    keys.handleKeys(ctDraw);
-    stage.update();
+    ctDraw.handleKeys();
+    ctDraw.stage.update();
 }
 
 function init() {
     addWindowListeners();
-    var username = prompt("Enter username");
-    username = username ? username :  "tempuser";
-   
     resizeCanvas();
-    moving = false;
-    stage = new createjs.Stage("mainCanvas");
-    sys.username = username;
+
+    sys.username = prompt("Enter username");
+    sys.username = sys.username ? sys.username :  "tempuser";
+   
+    var stage = new createjs.Stage("mainCanvas");
     // Fetch userlist
     sys.Rest('users').then(function(result) {
-        user = result;
-        user.username = username;
+        var user = result;
+        user.username = sys.username;
         sys.Rest('map').then(function(result) {
             var container = new createjs.Container();
-	    stage.addChild(container);
-	    ctDraw = new Draw(container, new Grid(result), new Grid(), user);
-	    initGrid(ctDraw, container);
-	    sys.LongPoll(true, ctDraw);
-	});
+	        stage.addChild(container);
+	        ctDraw = new Draw(container, stage, new Grid(result), new Grid(), user);
+	        initGrid(ctDraw, container);
+
+            // Init Polling
+	        sys.LongPoll(true, ctDraw);
+	    });
     }, function(err) {
          console.log('map read failed');
     });
@@ -41,13 +35,13 @@ function init() {
 
 function initGrid(draw, container) {
     // Adjust grid offset
-    container.x -= GRID_SIZE * user.x;
-    container.y += GRID_SIZE * user.y;
+    container.x -= GRID_SIZE * draw.user.x;
+    container.y += GRID_SIZE * draw.user.y;
 
     draw.fillGrid();
 
     // Draw User
-    stage.addChild(draw.drawUser(0,0,"Purple"));
+    draw.stage.addChild(draw.drawUser(0,0,"Purple"));
 
     // Start Tick
     createjs.Ticker.setFPS(FRAME_RATE);	

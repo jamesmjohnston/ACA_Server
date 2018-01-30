@@ -32,8 +32,9 @@ module.exports = function(polls, map, User) {
 		var chunks = map.getVisibleChunks(user);
 		var view = {};
 
+        // Expand visible chunks
 		for (var i in chunks) {
-			if (_.indexOf(user.chunks, chunks[i])<0) {
+			if (_.indexOf(user.chunks, chunks[i]) < 0) {
 				user.chunks.push(chunks[i]);
 				console.log("adding: ", map.data[chunks[i]]);
 				view[chunks[i]] = map.data[chunks[i]];
@@ -41,6 +42,7 @@ module.exports = function(polls, map, User) {
 		}
 		user.save();
 
+        // Generate list of users to present to user
 		if (!_.isEmpty(updateList = user.checkLocal(router.users))) 
 			polls.update(id, updateList);
 		
@@ -52,7 +54,7 @@ module.exports = function(polls, map, User) {
 				
 		}
 		
-		
+        // Repond with new chunks of availabe
 		res.send(view);
 	});
 

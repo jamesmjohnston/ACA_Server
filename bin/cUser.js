@@ -8,35 +8,49 @@ function User(user) {
 		this.createUser(user);
 };
 
-User.prototype.checkLocal = function(users) {
-	var updateList = {};
-	for (var i in users) {
-		if (this.id != i) {
-			var otherUser = users[i];
-			var dist = distance([otherUser.x, otherUser.y], [this.x, this.y]);
-			if (dist < 20) {
-				updateList[i]={x:otherUser.x, y:otherUser.y};
-			}
-		}
-	}
-	return updateList;
-	
+// Generate list of users within given rage
+User.prototype.checkLocal = function(users, range) {
+    var updateList = {};
+
+    for (var i in users) {
+        if (this.id != i) {
+            var otherUser = users[i];
+            var dist = distance([otherUser.x, otherUser.y], [this.x, this.y]);
+            if (dist <= range)
+                updateList[i] = {x: otherUser.x, y: otherUser.y};
+        }
+    }
+
+    return updateList;
 }
 
+User.prototype.getChunk = function() {
+	var chunk = {};
+	chunk.x = Math.floor(this.x/16);
+	chunk.y = Math.floor(this.y/16);
+
+	return chunk;
+}
+
+User.prototype.save = function () {
+	users.users[this.id] = this;
+	sys.saveJSON('users', users.users);
+};
+
 User.prototype.setUser =  function(user) {
-	this.id = user.id;
-	this.x = user.x;
-	this.y = user.y;
-	this.hunger = user.hunger;
-	this.health = user.health;
-	this.walked = user.walked;
-	this.inventory = user.inventory;
-	this.verbose = user.verbose;
-	this.money = user.money;
-	this.verbose = user.verbose;
-	this.inactive = user.inactive;
-	this.equiped = user.equiped;
-	this.chunks = user.chunks;
+    this.id = user.id;
+    this.x = user.x;
+    this.y = user.y;
+    this.hunger = user.hunger;
+    this.health = user.health;
+    this.walked = user.walked;
+    this.inventory = user.inventory;
+    this.verbose = user.verbose;
+    this.money = user.money;
+    this.verbose = user.verbose;
+    this.inactive = user.inactive;
+    this.equiped = user.equiped;
+    this.chunks = user.chunks;
 };
 
 User.prototype.createUser =  function(user) {
@@ -56,15 +70,3 @@ User.prototype.createUser =  function(user) {
     this.save();
 };
 
-User.prototype.getChunk = function() {
-	var chunk = {};
-	chunk.x = Math.floor(this.x/16);
-	chunk.y = Math.floor(this.y/16);
-	return chunk;
-	
-}
-
-User.prototype.save = function () {
-	users.users[this.id] = this;
-	sys.saveJSON('users', users.users);
-};
