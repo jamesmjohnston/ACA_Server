@@ -53,13 +53,13 @@ Draw.prototype.drawOtherUsers = function(data, userList) {
 	}
 }
 
-Draw.prototype.drawUser = function(target, x, y, color) {
+Draw.prototype.drawUser = function(x, y, color) {
 	var usr = new createjs.Container();
 	usr.addChild(this.drawSquare(hCenter - GRID_SIZE/2 + 19, vCenter - GRID_SIZE/2 + 19, GRID_SIZE - 38, GRID_SIZE - 38, "Black"));
 	usr.addChild(this.drawSquare(hCenter - GRID_SIZE/2 + 20, vCenter - GRID_SIZE/2 + 20, GRID_SIZE - 40, GRID_SIZE - 40, color));
 	usr.x += x*GRID_SIZE;
 	usr.y += y*GRID_SIZE;
-	target.addChild(usr);
+	this.target.addChild(usr);
 }
 
 Draw.prototype.drawSquare = function(x, y, width, height, color, outline) {
