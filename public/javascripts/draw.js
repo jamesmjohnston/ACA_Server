@@ -1,40 +1,40 @@
 var colors = ["#2E7D32", "#DAF7A6", "#515A5A", "#21618C"];
 
-function Draw(target, map, grid) {
+function Draw(target, map, grid, user) {
 	this.target = target;
 	this.map = map;
 	this.grid = grid;
+    this.user = user;
 }
 
 Draw.prototype.fillGrid = function() {
     for (var x = user.x-2; x < user.x+3; x++) {
-		for (var y =user.y-2; y < user.y+3; y ++) {
-			if (!this.grid.get(x,y)) {
-				var squ = this.drawSquare(hCenter-GRID_SIZE/2+x*GRID_SIZE,vCenter-GRID_SIZE/2-y*GRID_SIZE, GRID_SIZE, GRID_SIZE, colors[this.map.get(x,y)]);
-				this.grid.set(x, y, squ);
-				this.target.addChild(squ);
-			}
+        for (var y =user.y-2; y < user.y+3; y ++) {
+            if (!this.grid.get(x,y)) {
+                var squ = this.drawSquare(hCenter-GRID_SIZE/2+x*GRID_SIZE,vCenter-GRID_SIZE/2-y*GRID_SIZE, GRID_SIZE, GRID_SIZE, colors[this.map.get(x,y)]);
+                this.grid.set(x, y, squ);
+                this.target.addChild(squ);
+            }
         }
     }
-	this.refreshUserList(users);
+    this.refreshUserList(users);
 }
 
 Draw.prototype.refreshUserList =  function(userList) {
-	for (var i in userList) {
-		if (this.grid.get(userList[i].coord.x, userList[i].coord.y)) {
-			if (!userList[i].drawn ) {
-				userList[i].drawn = true;
-				this.target.addChild(userList[i]);
-			} else
-				this.target.setChildIndex(userList[i], this.target.getNumChildren() - 1);
-			
-		}
-	}
+    for (var i in userList) {
+        if (this.grid.get(userList[i].coord.x, userList[i].coord.y)) {
+            if (!userList[i].drawn ) {
+                userList[i].drawn = true;
+                this.target.addChild(userList[i]);
+            } else
+                this.target.setChildIndex(userList[i], this.target.getNumChildren() - 1);
+        }
+    }
 }
 
 Draw.prototype.drawOtherUsers = function(data, userList) {
 	for (var i in data) {
-		if (i != username) {
+		if (i != this.user.username) {
 			if (!_.has(userList,i)) {
 				var user = this.drawUser(data[i].x, data[i].y, "Blue");
 				userList[i] = user;
@@ -78,7 +78,7 @@ Draw.drawLine = function(x1, x2, y1, y2) {
 	line.graphics.moveTo(x1, y1);
 	line.graphics.lineTo(x2, y2);
 	line.graphics.endStroke();
-	return line;
+    return line;
 }
 
 
