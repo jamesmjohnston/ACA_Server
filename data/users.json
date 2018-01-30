@@ -1,47 +1,11 @@
 {
 	"james": {
 		"id": "james",
-		"x": 32,
-		"y": -12,
+		"x": 1,
+		"y": 4,
 		"hunger": 100,
 		"health": 100,
-		"walked": 266,
-		"inventory": [],
-		"verbose": true,
-		"money": 0,
-		"inactive": false,
-		"chunks": [
-			"1:-2",
-			"1:-1",
-			"2:-2",
-			"2:-1"
-		]
-	},
-	"marshall": {
-		"id": "marshall",
-		"x": 33,
-		"y": -12,
-		"hunger": 100,
-		"health": 100,
-		"walked": 227,
-		"inventory": [],
-		"verbose": true,
-		"money": 0,
-		"inactive": false,
-		"chunks": [
-			"1:-2",
-			"1:-1",
-			"2:-2",
-			"2:-1"
-		]
-	},
-	"null": {
-		"id": "null",
-		"x": 0,
-		"y": 0,
-		"hunger": 100,
-		"health": 100,
-		"walked": 0,
+		"walked": 77,
 		"inventory": [],
 		"verbose": true,
 		"money": 0,
@@ -53,13 +17,49 @@
 			"0:0"
 		]
 	},
-	"": {
-		"id": "",
-		"x": 0,
-		"y": 0,
+	"marshall": {
+		"id": "marshall",
+		"x": 1,
+		"y": 3,
 		"hunger": 100,
 		"health": 100,
-		"walked": 0,
+		"walked": 46,
+		"inventory": [],
+		"verbose": true,
+		"money": 0,
+		"inactive": false,
+		"chunks": [
+			"-1:-1",
+			"-1:0",
+			"0:-1",
+			"0:0"
+		]
+	},
+	"jon": {
+		"id": "jon",
+		"x": 2,
+		"y": -5,
+		"hunger": 100,
+		"health": 100,
+		"walked": 53,
+		"inventory": [],
+		"verbose": true,
+		"money": 0,
+		"inactive": false,
+		"chunks": [
+			"-1:-1",
+			"-1:0",
+			"0:-1",
+			"0:0"
+		]
+	},
+	"tim": {
+		"id": "tim",
+		"x": 1,
+		"y": 5,
+		"hunger": 100,
+		"health": 100,
+		"walked": 20,
 		"inventory": [],
 		"verbose": true,
 		"money": 0,
