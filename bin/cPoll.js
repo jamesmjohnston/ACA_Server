@@ -57,7 +57,7 @@ Poll.prototype.recieve = function(id, res) {
     }
 }
 
-// Removes use from poll on logout
+// removes use from poll on logout
 Poll.prototype.remove = function (id, res) {
     if (id) {
         console.log("killing " + id);
@@ -85,11 +85,11 @@ Poll.prototype.update = function(id, data) {
 Poll.prototype.pollLocalUsers = function(user, users) {
     var updateList = {}
 
-    // Find all users in range and update
+    // find all users in range and update
     if (!_.isEmpty(updateList = user.checkLocal(users))) 
         this.update(user.id, updateList);
 
-    // Poll all users that were in range
+    // poll all users that were in range
     var teather = {};
     for (var tid in updateList) {
         var teatherUser = new User(tid);
