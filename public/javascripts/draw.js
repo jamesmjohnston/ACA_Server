@@ -13,8 +13,10 @@ Draw.prototype.fillGrid = function() {
     for (var x = this.user.x - 2; x < this.user.x + 3; x++) {
         for (var y = this.user.y-2; y < this.user.y + 3; y++) {
             if (!this.grid.get(x,y)) {
-                var squ = this.drawSquare(hCenter - GRID_SIZE / 2 + x * GRID_SIZE, vCenter - GRID_SIZE / 2 - y * GRID_SIZE,
-                 GRID_SIZE, GRID_SIZE, colors[this.map.get(x, y)]);
+                var squ = this.drawSquare(hCenter - GRID_SIZE / 2 + x * GRID_SIZE,
+                 vCenter - GRID_SIZE / 2 - y * GRID_SIZE,
+                  GRID_SIZE, GRID_SIZE, colors[this.map.get(x, y)]);
+
                 this.grid.set(x, y, squ);
                 this.target.addChild(squ);
             }
@@ -38,7 +40,7 @@ Draw.prototype.drawOtherUsers = function(data) {
 	for (var i in data) {
 		if (i != this.user.username) {
 			if (!_.has(this.users, i)) {
-				var newUser = this.drawUser(data[i].x, data[i].y, "Blue");
+				var newUser = this.drawUser(data[i].x, data[i].y, "Blue", i);
 				newUser.coord = {x:data[i].x, y: data[i].y};
 
 				if (this.grid.get(data[i].x, data[i].y)) {
@@ -57,10 +59,15 @@ Draw.prototype.drawOtherUsers = function(data) {
     this.refreshUserList(users);
 }
 
-Draw.prototype.drawUser = function(x, y, color) {
+Draw.prototype.drawUser = function(x, y, color, name) {
     var newUser = new createjs.Container();
     newUser.addChild(this.drawSquare(hCenter - GRID_SIZE/2 + 19, vCenter - GRID_SIZE/2 + 19, GRID_SIZE - 38, GRID_SIZE - 38, "Black"));
     newUser.addChild(this.drawSquare(hCenter - GRID_SIZE/2 + 20, vCenter - GRID_SIZE/2 + 20, GRID_SIZE - 40, GRID_SIZE - 40, color));
+    var text =new createjs.Text(name, "20px Arial", "Black");
+    text.textAlign="center";
+    text.x = hCenter;
+    text.y = vCenter - GRID_SIZE*.55;
+    newUser.addChild(text);
     newUser.x += x * GRID_SIZE;
     newUser.y += y * GRID_SIZE;
     return newUser;

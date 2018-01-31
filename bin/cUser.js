@@ -24,6 +24,43 @@ User.prototype.checkLocal = function(users, range) {
     return updateList;
 }
 
+User.prototype.move = function(dir) {
+    switch (dir) {
+        case 0:
+            this.walked++;
+            this.x--;
+            break;
+
+        case 1:
+            this.walked++;
+            this.y++;
+            break;
+
+        case 2:
+            this.walked++;
+            this.x++;
+            break;
+
+        case 3:
+            this.walked++;
+            this.y--;
+            break;
+    }
+    console.log("moving- " + this.id + " (" + this.x + ":" + this.y + ")");
+}
+
+User.prototype.expandChunks = function(chunks, map) {
+    var view = {}
+    // Expand visible chunks
+    for (var i in chunks) {
+        if (_.indexOf(this.chunks, chunks[i]) < 0) {
+            this.chunks.push(chunks[i]);
+            view[chunks[i]] = map.data[chunks[i]];
+        }
+    }
+    return view;
+}
+
 User.prototype.getChunk = function() {
 	var chunk = {};
 	chunk.x = Math.floor(this.x/16);

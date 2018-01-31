@@ -4,24 +4,16 @@ module.exports = function(polls, User) {
 	var router = express.Router();
 	
 	router.get('/init', function(req, res, next) {	
-		polls.add(req, res);
-		if (req.headers.authorization) {
-			var id = req.headers.authorization;
-			polls.data[id].data = {};
-			var user = new User(id), updateList = {};
-			if (!_.isEmpty(updateList = user.checkLocal(users.users))) 
-				polls.update(id, updateList);
-			
-		}
+	    var id = req.headers.authorization;
+        polls.init(id, res);
 	});
 	
 	router.get('/', function(req, res, next) {	
-		polls.add(req, res);
+		polls.recieve(req.headers.authorization, res);
 	});
 
     router.get('/kill', function(req, res, nest) {
-        console.log('killing user');
-        polls.remove(req, res);
+        polls.remove(req.headers.authirization, res);
     });
 
    return router;

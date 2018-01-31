@@ -41,7 +41,7 @@ function initGrid(draw, container) {
     draw.fillGrid();
 
     // Draw User
-    draw.stage.addChild(draw.drawUser(0,0,"Purple"));
+    draw.stage.addChild(draw.drawUser(0,0,"Purple", sys.username));
 
     // Start Tick
     createjs.Ticker.setFPS(FRAME_RATE);	
