@@ -12,6 +12,7 @@ function PollItem(res, free, sending, data) {
 }
 
 PollItem.prototype.send = function() {
+    console.log(this.free+"-"+this.sending+"-"+(this.res!=null));
     if (this.free && this.sending && this.res) {
         this.free = false;
         this.sending = false;
@@ -36,9 +37,15 @@ Poll.prototype.add = function(req, res) {
         this.data[id].send();
 }
 
+Poll.prototype.remove = function (req, res) {
+    var id = req.header.authorization;
+    delete this.data[id];
+}
+
 Poll.prototype.update = function(id, data) {
     var item = this.get(id);
     if (!_.isEqual(item.data, data)) {
+        console.log("sending:"+id);
         item.data = data;
         item.sending = true;
         item.send();

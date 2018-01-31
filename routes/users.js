@@ -6,7 +6,6 @@ module.exports = function(polls, map, User) {
 	/* GET users listing. */
 	router.get('/move/:dir', function(req, res, next) {
 		var id = req.headers.authorization;//req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-		console.log("moving- " + id);
 		var user = new User(id);
 		switch (parseInt(req.params.dir)) {
 			case 0:
@@ -32,6 +31,7 @@ module.exports = function(polls, map, User) {
 		var chunks = map.getVisibleChunks(user);
 		var view = {};
 
+		console.log("moving- " + id + " ("+user.x+":"+user.y+")");
         // Expand visible chunks
 		for (var i in chunks) {
 			if (_.indexOf(user.chunks, chunks[i]) < 0) {
@@ -46,12 +46,14 @@ module.exports = function(polls, map, User) {
 		if (!_.isEmpty(updateList = user.checkLocal(router.users))) 
 			polls.update(id, updateList);
 		
+
 		var teather = {};
 		for (var tip in updateList) {
 			var teatherUser = new User(tip);
-			if (!_.isEmpty(teather = teatherUser.checkLocal(router.users))) 
-				polls.update(tip, teather);
-				
+            teather = teatherUser.checkLocal(router.users);
+
+			if (!_.isEmpty(teather)) 
+				polls.update(tip, teather);				
 		}
 		
         // Repond with new chunks of availabe

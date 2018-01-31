@@ -22,11 +22,11 @@ function init() {
         sys.Rest('map').then(function(result) {
             var container = new createjs.Container();
 	        stage.addChild(container);
-	        ctDraw = new Draw(container, stage, new Grid(result), new Grid(), user);
+	        ctDraw = new Draw(container, stage, new Grid(result), new Grid(), user, users);
 	        initGrid(ctDraw, container);
 
             // Init Polling
-	        sys.LongPoll(true, ctDraw);
+	        sys.LongPoll(ctDraw);
 	    });
     }, function(err) {
          console.log('map read failed');
@@ -63,4 +63,5 @@ function addWindowListeners() {
     window.addEventListener('keyup',function(e){
         delete keyState[e.keyCode];
     },true);
+    window.onunload = sys.logout;
 }

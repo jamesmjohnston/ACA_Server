@@ -30,11 +30,12 @@ sys.LongPoll = function(draw) {
 
     xhttp.onload = function(e2){
         draw.drawOtherUsers(JSON.parse(this.responseText), users);
-        sys.LongPoll(false, draw);
+        sys.LongPoll(draw);
 	}
 	
 	xhttp.ontimeout = function() {
-	    sys.LongPoll(draw);	
+        if (!sys.killed)
+	        sys.LongPoll(draw);	
 	}
 		
 	xhttp.open('GET', "poll" + (init ? "/init" : ""), true);
@@ -43,6 +44,11 @@ sys.LongPoll = function(draw) {
 
     if (init)
         init = false;
+}
+
+sys.logout = function() {
+    sys.killed = true;
+    sys.Rest("poll/kill");
 }
 
 sys.loadJSON = function (filename) {

@@ -1,11 +1,12 @@
 var colors = ["#2E7D32", "#DAF7A6", "#515A5A", "#21618C"];
 
-function Draw(target, stage, map, grid, user) {
+function Draw(target, stage, map, grid, user, users) {
 	this.target = target;
     this.stage = stage;
 	this.map = map;
 	this.grid = grid;
     this.user = user;
+    this.users = users;
 }
 
 Draw.prototype.fillGrid = function() {
@@ -19,7 +20,6 @@ Draw.prototype.fillGrid = function() {
             }
         }
     }
-    this.refreshUserList(users);
 }
 
 Draw.prototype.refreshUserList =  function(userList) {
@@ -34,25 +34,27 @@ Draw.prototype.refreshUserList =  function(userList) {
     }
 }
 
-Draw.prototype.drawOtherUsers = function(data, userList) {
+Draw.prototype.drawOtherUsers = function(data) {
 	for (var i in data) {
 		if (i != this.user.username) {
-			if (!_.has(userList, i)) {
-				var user = this.drawUser(data[i].x, data[i].y, "Blue");
-				userList[i] = user;
-				user.coord = {x:data[i].x, y: data[i].y};
+			if (!_.has(this.users, i)) {
+				var newUser = this.drawUser(data[i].x, data[i].y, "Blue");
+				newUser.coord = {x:data[i].x, y: data[i].y};
+
 				if (this.grid.get(data[i].x, data[i].y)) {
-					user.drawn = true;
-					this.target.addChild(user);
+					newUser.drawn = true;
+					this.target.addChild(newUser);
 				} else
-					user.drawn = false;
-			} else if (userList[i].drawn) {
+					newUser.drawn = false;
+				this.users[i] = newUser;
+			} else if (this.users[i].drawn) {
 				
-				createjs.Tween.get(userList[i]).to({x:data[i].x*GRID_SIZE}, MOVE_SPEED).call();
-				createjs.Tween.get(userList[i]).to({y:-data[i].y*GRID_SIZE}, MOVE_SPEED).call();
+				createjs.Tween.get(this.users[i]).to({x:data[i].x*GRID_SIZE}, MOVE_SPEED).call();
+				createjs.Tween.get(this.users[i]).to({y:-data[i].y*GRID_SIZE}, MOVE_SPEED).call();
 			}
 		}
 	}
+    this.refreshUserList(users);
 }
 
 Draw.prototype.drawUser = function(x, y, color) {

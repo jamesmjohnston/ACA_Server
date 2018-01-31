@@ -16,7 +16,7 @@ User.prototype.checkLocal = function(users, range) {
         if (this.id != i) {
             var otherUser = users[i];
             var dist = distance([otherUser.x, otherUser.y], [this.x, this.y]);
-            if (dist <= range)
+            if (dist <= 10)
                 updateList[i] = {x: otherUser.x, y: otherUser.y};
         }
     }
